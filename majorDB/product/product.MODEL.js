@@ -1,0 +1,1 @@
+const productMODEL = {}; module.export = productMODEL;
