@@ -6,23 +6,27 @@ function checkDbModel(type) {
   // CHECK DU FICHIER `<type>.MODEL.js`
   const filePath = path.join(
     process.cwd(),
-    "MajorDB",
+    "majorDB",
     type,
     `${type}.MODEL.js`
   );
   if (!fs.existsSync(filePath)) {
     // CREATION DU FICHIER `<type>.MODEL.js` S'IL N'EXISTE PAS ENCORE
+    console.log(
+      `le fichier ${type}.MODEL.js n'existe pas. Création en cours...`
+    );
     fs.writeFileSync(
       filePath,
       `const ${type}MODEL = {}; module.export = ${type}MODEL;`
     );
-    console.log(`Nouveau fichier créé : ${type}.MODEL.js`);
-    return {
-      status: `ok : création de ${type}.MODEL.js effectué. Veuillez remplir le model selon vos besoins`,
-    };
+    console.log(`le fichier ${type}.MODEL.js à été créé.`);
+    return { status: "ok", message: `le fichier ${type}.MODEL.js à été créé` };
   } else {
     // SI LE FICHIER EST DEJA CREE
-    return { status: `ok : fichier ${type}.MODEL.js existant` };
+    return {
+      status: "ok",
+      message: `le fichier ${type}.MODEL.js existe.`,
+    };
   }
 }
 

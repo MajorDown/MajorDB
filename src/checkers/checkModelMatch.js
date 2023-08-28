@@ -45,13 +45,14 @@ function checkModelMatch(type, object) {
   // CHECK 4 : VERIFIER QUE CHAQUE KEY DU MODELE POSSEDANT UNIQUE=TRUE NE SOIT PAS ENCORE PRESENT DANS LE TABLEAU
   for (const prop of objectProps) {
     if (model[prop].unique === true) {
-      if (db.includes(object[prop])) {
+      const allreadyExist = db.some((item) => item[prop] === object[prop]);
+      if (allreadyExist) {
         console.log(
-          `La propriété ${prop} est unique et existe déjà dans le tableau.`
+          `un objet avec la valeur de ${prop} existe déjà dans la db.`
         );
         return {
           status: "err",
-          message: `La propriété ${prop} est unique et existe déjà dans le tableau.`,
+          message: `un objet avec la valeur de ${prop} existe déjà dans la db.`,
         };
       }
     }

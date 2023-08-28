@@ -7,15 +7,19 @@ function checkDbFile(type) {
   const filePath = path.join(process.cwd(), "majorDB", type, `${type}.DB.js`);
   if (!fs.existsSync(filePath)) {
     // CREATION DU FICHIER `<type>.DB.js` S'IL N'EXISTE PAS ENCORE
+    console.log(`le fichier ${type}.DB.js n'existe pas. Création en cours...`);
     fs.writeFileSync(
       filePath,
       `const ${type}DB = []; module.export = ${type}DB;`
     );
-    console.log(`Nouveau fichier créé : ${type}.DB.js`);
-    return { status: `ok : création de ${type}.DB.js effectué` };
+    console.log(`le fichier ${type}.DB.js à été créé.`);
+    return { status: "ok", message: `le fichier ${type}.DB.js à été créé` };
   } else {
     // SI LE FICHIER EST DEJA CREE
-    return { status: `ok : fichier ${type}.DB.js déjà existant` };
+    return {
+      status: "ok",
+      message: `le fichier ${type}.DB.js existe.`,
+    };
   }
 }
 

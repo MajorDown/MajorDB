@@ -1,8 +1,14 @@
-const checkModelMatch = require("./src/checkers/checkModelMatch");
+const checkDbPath = require("./src/checkers/checkDbPath");
+const checkDbFile = require("./src/checkers/checkDbFile");
+const checkDbModel = require("./src/checkers/checkDbModel");
 
-const obj = {
-  name: "pedro",
-  age: 30,
-};
+async function go() {
+  const dbPath = await checkDbPath("user");
+  const dbFile = await checkDbFile("user");
+  const dbModel = await checkDbModel("user");
+  console.log(dbPath);
+  console.log(dbFile);
+  console.log(dbModel);
+}
 
-console.log(checkModelMatch("user", obj));
+go();
