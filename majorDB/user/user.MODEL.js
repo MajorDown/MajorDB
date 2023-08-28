@@ -1,1 +1,0 @@
-const userMODEL = {}; module.export = userMODEL;

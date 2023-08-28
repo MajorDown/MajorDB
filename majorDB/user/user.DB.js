@@ -1,1 +1,0 @@
-const userDB = []; module.export = userDB;
