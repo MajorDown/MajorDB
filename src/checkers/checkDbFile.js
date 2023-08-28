@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
-const checkResult = require("./checkersTools/checkResult");
-const checkLog = require("./checkersTools/checkLog");
+const checkResult = require("./checkResult");
+const checkLog = require("./checkLog");
 
 function checkDbFile(type) {
   const checkerName = "checkDbFile";
@@ -15,7 +15,7 @@ function checkDbFile(type) {
     );
     fs.writeFileSync(
       filePath,
-      `const ${type}DB = []; module.export = ${type}DB;`
+      `const ${type}DB = []; module.exports = ${type}DB;`
     );
     checkLog(checkerName, `le fichier "${type}.DB.js" à été créé.`);
 

@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
-const checkResult = require("./checkersTools/checkResult");
-const checkLog = require("./checkersTools/checkLog");
+const checkResult = require("./checkResult");
+const checkLog = require("./checkLog");
 
 function checkDbModel(type) {
   const checkerName = "checkDbModel";
@@ -20,10 +20,16 @@ function checkDbModel(type) {
     );
     fs.writeFileSync(
       filePath,
-      `const ${type}MODEL = {}; module.export = ${type}MODEL;`
+      `const ${type}MODEL = {}; module.exports = ${type}MODEL;`
     );
-    checkLog(checkerName, `le fichier "${type}.MODEL.js" à été créé.`);
-    return checkResult("ok", `le fichier "${type}.MODEL.js" à été créé`);
+    checkLog(
+      checkerName,
+      `le fichier "${type}.MODEL.js" à été créé. Veuillez l'implémenter pour le rendre utilisable.`
+    );
+    return checkResult(
+      "ok",
+      `le fichier "${type}.MODEL.js" à été créé. Veuillez l'implémenter pour le rendre utilisable`
+    );
   } else {
     // SI LE FICHIER EST DEJA CREE
     return checkResult("ok", `le fichier "${type}.MODEL.js" existe.`);

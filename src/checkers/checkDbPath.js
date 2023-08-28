@@ -1,8 +1,8 @@
 // CHECK L'EXISTENCE DU PATH VER LE TYPE DEMANDE
 const path = require("path");
 const fs = require("fs");
-const checkResult = require("./checkersTools/checkResult");
-const checkLog = require("./checkersTools/checkLog");
+const checkResult = require("./checkResult");
+const checkLog = require("./checkLog");
 
 function checkDbPath(type) {
   const checkerName = "checkDbPath";

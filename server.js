@@ -1,11 +1,9 @@
-const checkDbPath = require("./src/checkers/checkDbPath");
-const checkDbFile = require("./src/checkers/checkDbFile");
-const checkDbModel = require("./src/checkers/checkDbModel");
+const MajorDB = require("./src/MajorDB");
 
-function go() {
-  console.log(checkDbPath("user"));
-  console.log(checkDbFile("user"));
-  console.log(checkDbModel("user"));
-}
+const object = {
+  name: "riri",
+  age: "21",
+};
 
-go();
+const test = MajorDB.createFromModel("user", object);
+console.log(test);
