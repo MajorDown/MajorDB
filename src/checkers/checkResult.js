@@ -1,4 +1,4 @@
-function checkResult(status, message, data) {
+const checkResult = (status, message, data) => {
   if (data) {
     return {
       status,
@@ -10,6 +10,6 @@ function checkResult(status, message, data) {
       status,
       message,
     };
-}
+};
 
 module.exports = checkResult;

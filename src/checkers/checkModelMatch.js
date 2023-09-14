@@ -2,18 +2,17 @@ const path = require("path");
 const checkResult = require("./checkResult");
 const checkLog = require("./checkLog");
 
-function checkModelMatch(type, object) {
-  const checkerName = "checkModelMatch";
+const checkModelMatch = (type, object) => {
   const dbPath = path.join(process.cwd(), "majorDB", type);
-  const model = require(`${dbPath}/${type}.MODEL.js`);
-  const db = require(`${dbPath}/${type}.DB.js`);
+  const model = require(`${dbPath}/${type}.MODEL.json`);
+  const db = require(`${dbPath}/${type}.DB.json`);
   // CHECK 1 : VERIFIER QUE CHAQUE KEY DE L'OBJET SOIT PRESENT DANS LE MODEL
   const objectProps = Object.keys(object);
   const modelProps = Object.keys(model);
   for (const prop of objectProps) {
     if (!modelProps.includes(prop)) {
       checkLog(
-        checkerName,
+        `checkModelMatch`,
         `La propriété ${prop} n'existe pas dans le modèle.`
       );
       return checkResult(
@@ -28,7 +27,7 @@ function checkModelMatch(type, object) {
     const modelPropType = model[prop].type;
     if (objectPropType !== modelPropType) {
       checkLog(
-        checkerName,
+        `checkModelMatch`,
         `Le type de la propriété ${prop} ne correspond pas au modèle.`
       );
       return checkResult(
@@ -41,7 +40,7 @@ function checkModelMatch(type, object) {
   for (const prop of objectProps) {
     if (model[prop].required === true && object[prop] === undefined) {
       checkLog(
-        checkerName,
+        `checkModelMatch`,
         `La propriété ${prop} est requise mais n'existe pas dans l'objet.`
       );
       return checkResult(
@@ -56,7 +55,7 @@ function checkModelMatch(type, object) {
       const allreadyExist = db.some((item) => item[prop] === object[prop]);
       if (allreadyExist) {
         checkLog(
-          checkerName,
+          `checkModelMatch`,
           `un objet avec la valeur de ${prop} existe déjà dans la db.`
         );
         return checkResult(
@@ -68,6 +67,6 @@ function checkModelMatch(type, object) {
   }
   // SI l'OBJET EST CONFORME
   return checkResult("ok", "objet conforme au modèle");
-}
+};
 
 module.exports = checkModelMatch;

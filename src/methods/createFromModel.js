@@ -1,28 +1,33 @@
-const path = require("path");
-const fs = require("fs");
 const checkDbFile = require("../checkers/checkDbFile");
 const checkDbModel = require("../checkers/checkDbModel");
-const checkDbPath = require("../checkers/checkDbPath");
 const checkModelMatch = require("../checkers/checkModelMatch");
-const methodResult = require("./methodResult");
-const checkDataCreation = require("../checkers/checkDataCreation");
 const checkIdCreation = require("../checkers/checkIdCreation");
+const checkDataCreation = require("../checkers/checkDataCreation");
+const checkLog = require("../checkers/checkLog");
 
-const createFromModel = (dbType, newObject) => {
-  const method = "createFromModel";
+const createFromModel = (dbType, newObject, newObjectKey) => {
+  checkLog("createFromModel", "implémentation de la DB en cour...");
   // VERIFICATION DU PATH ET DES FICHIERS NECESSAIRES
-  checkDbPath(dbType);
-  checkDbFile(dbType);
-  checkDbModel(dbType);
-  // VERIFICATION DE LA CONFORMITE DE NEWOBJECT
-  const modelMatch = checkModelMatch(dbType, newObject);
-  if (modelMatch.status === "err") return methodResult(method, modelMatch);
-  // AJOUT DE NEWOBJECT DANS LA DB APRES IDENTIFICATION
-  const identifiedObject = checkIdCreation(newObject);
-  if (identifiedObject.status === "err")
-    return methodResult(method, identifiedObject);
-  const dataCreation = checkDataCreation(dbType, identifiedObject.data);
-  return methodResult(method, dataCreation);
+  const dbFile = checkDbFile(dbType);
+  if (dbFile.status === "err") return dbFile;
+  // VERIFICATION DE L'EXISTENCE D'UN MODEL POUR LA DB
+  const dbModel = checkDbModel(dbType);
+  if (dbModel.status === "true") {
+    // VERIFICATION DE LA CONFORMITE DE NEWOBJECT PAR RAPPORT AU MODEL
+    const modelMatch = checkModelMatch(dbType, newObject);
+    if (modelMatch.status === "err") return modelMatch;
+  }
+  // IDENTIFICATION DE NEWOBJECT
+  const objectIdentification = checkIdCreation(newObject);
+  if (objectIdentification.status === "err") return objectIdentification;
+  const objectwithId = objectIdentification.data;
+  // AJOUT DE OBJECTITHID DANS LA DB APRES IDENTIFICATION
+  const dataCreation = checkDataCreation(dbType, objectwithId, newObjectKey);
+  if (dataCreation.status === "err") return dataCreation;
+  else {
+    dataCreation[data] = objectwithId;
+    return dataCreation;
+  }
 };
 
 module.exports = createFromModel;
