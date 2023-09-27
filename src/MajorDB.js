@@ -1,11 +1,13 @@
+const findOneById = require("./methods/FindOneById");
 const createFromModel = require("./methods/createFromModel");
+const deleteOneById = require("./methods/deleteOneById");
 
 const MajorDB = {
   createFromModel: createFromModel,
-  findOneById: "",
+  findById: findOneById,
   findAllBy: "",
   findAllWithout: "",
-  deleteOnebyId: "",
+  deleteOneById: deleteOneById,
   deleteOneby: "",
   updateOneById: "",
 };

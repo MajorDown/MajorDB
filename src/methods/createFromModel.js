@@ -25,7 +25,7 @@ const createFromModel = (dbType, newObject, newObjectKey) => {
   const dataCreation = checkDataCreation(dbType, objectwithId, newObjectKey);
   if (dataCreation.status === "err") return dataCreation;
   else {
-    dataCreation[data] = objectwithId;
+    dataCreation.data = objectwithId;
     return dataCreation;
   }
 };

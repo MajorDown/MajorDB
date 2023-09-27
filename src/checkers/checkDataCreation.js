@@ -5,7 +5,7 @@ const checkLog = require("./checkLog");
 
 function checkDataCreation(type, object, objectKey) {
   try {
-    const dbPath = path.join(process.cwd(), "majorDB", type, `${type}.DB.js`);
+    const dbPath = path.join(process.cwd(), "majorDB", type, `${type}.DB.json`);
     const db = require(dbPath);
     // SI LA DB EST UN ARRAY
     if (Array.isArray(db)) {

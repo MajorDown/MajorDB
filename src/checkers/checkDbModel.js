@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const checkLog = require("./checkLog");
+const checkResult = require("./checkResult");
 
 const checkDbModel = (type) => {
   const filePath = path.join(

@@ -1,9 +1,11 @@
 const MajorDB = require("./src/MajorDB");
 
 const object = {
-  name: "riri",
-  age: "21",
+  name: "ruru",
+  age: 25,
 };
 
-const test = MajorDB.createFromModel("user", object);
+const id = "MDB20230927203416111";
+
+const test = MajorDB.deleteOneById("user", id);
 console.log(test);

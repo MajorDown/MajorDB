@@ -6,13 +6,13 @@ const checkLog = require("./checkLog");
 const checkDbFile = (type) => {
   // VERIFICATION DU DOSSIER MAJORDB
   const majorDBPath = path.join(process.cwd(), "majorDB");
-  if (!fs.existsSync(majorDBPathPath)) {
+  if (!fs.existsSync(majorDBPath)) {
     checkLog("checkDbFile", `Il n'existe pas dossier "majorDB"`);
     return checkResult("err", `Il n'existe pas de dossier "majorDB"`);
   }
   // VERIFICATION DU DOSSIER TYPE
   const folderPath = path.join(majorDBPath, type);
-  if (!fs.existsSync(majorDBPathPath)) {
+  if (!fs.existsSync(folderPath)) {
     checkLog(`checkDbFile`, `Il n'existe pas dossier "${type}"`);
     return checkResult("err", `Il n'existe pas de dossier "${type}"`);
   }
